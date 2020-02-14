@@ -1,7 +1,8 @@
 # locationiq-java-client
 
 LocationIQ
-- API version: 1.0.0
+- API version: 2.0.0
+  - Build date: 2020-02-14T16:06:31.759327+05:30[Asia/Kolkata]
 
 LocationIQ provides flexible enterprise-grade location based solutions. We work with developers, startups and enterprises worldwide serving billions of requests everyday. This page provides an overview of the technical aspects of our API and will help you get started.
 
@@ -39,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.locationiq</groupId>
   <artifactId>locationiq-java-client</artifactId>
-  <version>1.0.0</version>
+  <version>2.0.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -49,7 +50,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.locationiq:locationiq-java-client:1.0.0"
+compile "com.locationiq:locationiq-java-client:2.0.0"
 ```
 
 ### Others
@@ -62,7 +63,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/locationiq-java-client-1.0.0.jar`
+* `target/locationiq-java-client-2.0.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -71,34 +72,37 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 
-import LocationIq.*;
-import LocationIq.auth.*;
-import com.locationiq.client.model.*;
+// Import classes:
+import com.locationiq.client.ApiClient;
+import com.locationiq.client.ApiException;
+import com.locationiq.client.Configuration;
+import com.locationiq.client.auth.*;
+import com.locationiq.client.models.*;
 import com.locationiq.client.api.BalanceApi;
 
-import java.io.File;
-import java.util.*;
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://eu1.locationiq.com/v1");
+    
+    // Configure API key authorization: key
+    ApiKeyAuth key = (ApiKeyAuth) defaultClient.getAuthentication("key");
+    key.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //key.setApiKeyPrefix("Token");
 
-public class BalanceApiExample {
-
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        
-        // Configure API key authorization: key
-        ApiKeyAuth key = (ApiKeyAuth) defaultClient.getAuthentication("key");
-        key.setApiKey("YOUR API KEY");
-        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-        //key.setApiKeyPrefix("Token");
-
-        BalanceApi apiInstance = new BalanceApi();
-        try {
-            Balance result = apiInstance.balance();
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling BalanceApi#balance");
-            e.printStackTrace();
-        }
+    BalanceApi apiInstance = new BalanceApi(defaultClient);
+    try {
+      Balance result = apiInstance.balance();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling BalanceApi#balance");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 
 ```
@@ -110,6 +114,10 @@ All URIs are relative to *https://eu1.locationiq.com/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *BalanceApi* | [**balance**](docs/BalanceApi.md#balance) | **GET** /balance.php | 
+*DirectionsApi* | [**directions**](docs/DirectionsApi.md#directions) | **GET** /directions/driving/{coordinates} | Directions Service
+*MatchingApi* | [**matching**](docs/MatchingApi.md#matching) | **GET** /matching/driving/{coordinates} | Matching Service
+*MatrixApi* | [**matrix**](docs/MatrixApi.md#matrix) | **GET** /matrix/driving/{coordinates} | Matrix Service
+*NearestApi* | [**nearest**](docs/NearestApi.md#nearest) | **GET** /nearest/driving/{coordinates} | Nearest Service
 *ReverseApi* | [**reverse**](docs/ReverseApi.md#reverse) | **GET** /reverse.php | Reverse Geocoding
 *SearchApi* | [**search**](docs/SearchApi.md#search) | **GET** /search.php | Forward Geocoding
 
@@ -119,8 +127,16 @@ Class | Method | HTTP request | Description
  - [Address](docs/Address.md)
  - [Balance](docs/Balance.md)
  - [Daybalance](docs/Daybalance.md)
+ - [DirectionsDirections](docs/DirectionsDirections.md)
+ - [DirectionsDirectionsRoutes](docs/DirectionsDirectionsRoutes.md)
+ - [DirectionsMatching](docs/DirectionsMatching.md)
+ - [DirectionsMatrix](docs/DirectionsMatrix.md)
+ - [DirectionsMatrixSources](docs/DirectionsMatrixSources.md)
+ - [DirectionsNearest](docs/DirectionsNearest.md)
+ - [DirectionsNearestWaypoints](docs/DirectionsNearestWaypoints.md)
  - [Error](docs/Error.md)
  - [Location](docs/Location.md)
+ - [Matchquality](docs/Matchquality.md)
  - [Namedetails](docs/Namedetails.md)
 
 
